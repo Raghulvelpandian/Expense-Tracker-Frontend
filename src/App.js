@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import {
+  FaHome,
+  FaMoneyBill,
+  FaCog,
+  FaUser,
+  FaPhone,
+  FaChevronDown
+} from "react-icons/fa";
 
 function App() {
   const [amount, setAmount] = useState("");
@@ -8,6 +16,7 @@ function App() {
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [expenses, setExpenses] = useState([]);
+  const [openMenu, setOpenMenu] = useState(false);
 
   // 🔁 Fetch data
   const fetchExpenses = () => {
@@ -24,7 +33,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("https://your-backend.up.railway.app/api/products/", {
+      axios.post("http://127.0.0.1:8000/api/add/", {
       amount,
       category,
       date,
@@ -61,17 +70,54 @@ function App() {
       
       <div className="sidebar">
         <h2>Expense App</h2>
-        <ul>
-          <li>Home</li>
-          <li> Expenses</li>
-          <li> Settings</li>
-          <li>Log in</li>
-          <li>Contact</li>
-        </ul>
+        <ul className="menu">
+
+  <li>
+    <FaHome className="icon" />
+    Home
+  </li>
+
+  <li onClick={() => setOpenMenu(!openMenu)}>
+    <div className="menu-row">
+      <div>
+        <FaMoneyBill className="icon" />
+        Expenses
       </div>
 
+      <FaChevronDown />
+    </div>
+  </li>
+
+  {openMenu && (
+    <div className="submenu">
+
+      <li>Add Expense</li>
+      <li>View Expenses</li>
+      <li>Monthly Report</li>
+
+    </div>
+  )}
+
+  <li>
+    <FaCog className="icon" />
+    Settings
+  </li>
+
+  <li>
+    <FaUser className="icon" />
+    Login
+  </li>
+
+  <li>
+    <FaPhone className="icon" />
+    Contact
+  </li>
+
+  </ul>
+  </div>
+
       
-      <div className="main">
+   <div className="main">
 
         
         <h2 className="dashboard">Dashboard</h2>
