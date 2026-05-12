@@ -20,7 +20,7 @@ function App() {
 
   // 🔁 Fetch data
   const fetchExpenses = () => {
-    axios.get("http://127.0.0.1:8000/api/expenses/")
+    axios.get("https://expense-tracker-ihb1.onrender.com/api/expenses/")
       .then(res => setExpenses(res.data))
       .catch(err => console.log(err));
   };
@@ -33,7 +33,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-      axios.post("http://127.0.0.1:8000/api/add/", {
+      axios.post("https://expense-tracker-ihb1.onrender.com/api/add/", {
       amount,
       category,
       date,
@@ -55,7 +55,7 @@ function App() {
   const deleteExpense = (id) => {
   console.log("Deleting ID:", id);
 
-  axios.delete(`http://127.0.0.1:8000/api/delete/${id}/`)
+  axios.delete(`https://expense-tracker-ihb1.onrender.com/api/delete/${id}/`)
     .then(res => {
       console.log(res);
       alert("Deleted");
